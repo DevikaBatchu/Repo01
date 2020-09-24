@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MergePlugins
+Bundle-SymbolicName: MergePlugins;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: mergeplugins.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.apache.felix.scr,
+ org.eclipse.equinox.event,
+ DogShow;bundle-version="1.0.0",
+ Employee01;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: MergePlugins
+Bundle-ActivationPolicy: lazy
