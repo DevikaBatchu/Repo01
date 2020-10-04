@@ -22,9 +22,9 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            class="employee01.EmpView01"
-            id="employee01.EmpView01"
-            name="empController"
+            class="employee01.EmpController"
+            id="employee01.EmpController"
+            name="EmployeeDetails"
             restorable="true">
       </view>
    </extension>
@@ -34,7 +34,7 @@
             targetID="*">
          <view
                closeable="false"
-               id="employee01.EmpView01"
+               id="employee01.EmpController"
                minimized="false"
                relationship="stack"
                relative="org.eclipse.ui.editorss"

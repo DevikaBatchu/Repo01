@@ -10,7 +10,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 
-public class Hello extends AbstractHandler{
+public class HelloHandler extends AbstractHandler{
 	
 	public static final String ID = "dogshow.handler";
 	

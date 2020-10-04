@@ -35,7 +35,7 @@ public class ActionDialog extends Action implements IWorkbenchAction{
 		
 		try {
 			   
-			FileInputStream fis = new FileInputStream("Dog.txt");
+			FileInputStream fis = new FileInputStream("D:\\Git\\Repo01\\DogShow\\src\\dogshow\\Dog.txt");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			
 			Object obj = ois.readObject();
@@ -80,6 +80,10 @@ public class ActionDialog extends Action implements IWorkbenchAction{
 		
 		
 		
+		
+	}
+	
+	public void display(String Oname) {
 		
 	}
 

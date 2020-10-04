@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -24,21 +25,24 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 
 
-public class EmpView01 extends ViewPart{
+public class EmpController extends ViewPart{
 	
 	public static final String ID = "employee01.EmpView01";
 
 	@Inject IWorkbench workbench;
 	
 	private TableViewer v;
+	
+	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	
 	private static TableViewerColumn createColumnFor(TableViewer viewer, String label, int style) {
 		
@@ -224,13 +228,15 @@ public class EmpView01 extends ViewPart{
 				
 				try {
 					
-					FileOutputStream fos = new FileOutputStream("Emp.txt");
+					FileOutputStream fos = new FileOutputStream("D:\\Git\\Repo01\\Employee01\\src\\employee01\\Emp.txt");
 					
 					ObjectOutputStream oos = new ObjectOutputStream(fos);
 					
 					oos.writeObject(event.item.getData());
 					
 					System.out.println("Employee Details added successfully");
+					
+					MessageDialog.openInformation(shell, "confirmation Dialogue", "Details selected & added to XML successfully");
 					
 					
 				} catch (FileNotFoundException e) {

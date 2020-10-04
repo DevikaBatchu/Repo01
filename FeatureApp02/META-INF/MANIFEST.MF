@@ -1,13 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: MergePlugins
-Bundle-SymbolicName: MergePlugins;singleton:=true
+Bundle-Name: FeatureApp02
+Bundle-SymbolicName: FeatureApp02;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: mergeplugins.Activator
+Bundle-Activator: featureapp02.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.apache.felix.scr,
- org.eclipse.equinox.event
+ org.eclipse.equinox.event,
+ org.eclipse.ui.intro
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Automatic-Module-Name: MergePlugins
+Automatic-Module-Name: FeatureApp02
 Bundle-ActivationPolicy: lazy

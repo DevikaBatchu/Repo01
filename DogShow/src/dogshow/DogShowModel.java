@@ -29,6 +29,17 @@ public class DogShowModel implements Serializable{
 	}
 
 
+	
+
+	public DogShowModel(String dogName, String dogBreed, String ownerName, String phno) {
+		super();
+		this.dogName = dogName;
+		this.dogBreed = dogBreed;
+		this.ownerName = ownerName;
+		Phno = phno;
+	}
+
+
 
 	public String getDogName() {
 		return dogName;
@@ -95,8 +106,28 @@ public class DogShowModel implements Serializable{
 		return "DogShowModel [dogName=" + dogName + ", dogBreed=" + dogBreed + ", ownerName=" + ownerName + ", Phno="
 				+ Phno + ", categories=" + Arrays.toString(categories) + "]";
 	}
+	
+	
+	public String toCsv() {
+		
+		return dogName +","+ dogBreed +","+ ownerName +","+ Phno + "\n";
+	}
 
 
+	public static DogShowModel parse(String strDog)  {
+		
+		DogShowModel dsm = null;
+		
+		String[] values = strDog.split(",");
+		
+		String dogName = values[0] ;
+		String dogBreed = values[1];
+		String ownerName = values[2];
+		String Phno =  values[3];
+		
+		dsm = new DogShowModel(dogName, dogBreed, ownerName, Phno);
+		return dsm;
+	}
 
 	
 	

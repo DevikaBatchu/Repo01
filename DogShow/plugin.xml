@@ -20,29 +20,6 @@
       </perspective>
    </extension>
    <extension
-         point="org.eclipse.ui.views">
-      <view
-            class="dogshow.DogShowController"
-            id="dogshow.DogShowController"
-            name="DogShow"
-            restorable="true">
-      </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="*">
-         <view
-               closeable="false"
-               id="dogshow.DogShowController"
-               minimized="false"
-               relationship="stack"
-               relative="org.eclipse.ui.editorss"
-               standalone="true">
-         </view>
-      </perspectiveExtension>
-   </extension>
-   <extension
          point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="true"
@@ -195,10 +172,33 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="dogshow.Hello"
+            class="dogshow.HelloHandler"
             commandId="dogshow.handler"
             helpContextId="sayHello">
       </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="dogshow.DogShowController"
+            id="dogshow.DogShowController"
+            name="Dogshow"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="*">
+         <view
+               closeable="false"
+               id="dogshow.DogShowController"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.ui.editorss"
+               standalone="true">
+         </view>
+      </perspectiveExtension>
    </extension>
 
 </plugin>

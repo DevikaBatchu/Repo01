@@ -37,7 +37,7 @@ public class EmpShow extends Action implements IWorkbenchAction{
 		
 		try {
 			   
-			FileInputStream fis = new FileInputStream("Emp.txt");
+			FileInputStream fis = new FileInputStream("D:\\Git\\Repo01\\Employee01\\src\\employee01\\Emp.txt");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			
 			Object obj = ois.readObject();

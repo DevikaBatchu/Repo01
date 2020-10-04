@@ -8,10 +8,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 import org.eclipse.swt.widgets.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.PaintEvent;
@@ -284,6 +286,7 @@ public class DogShowController extends ViewPart implements IPerspectiveFactory{
 		      new Label(ownerInfo, SWT.NULL).setText("Name:");
 		      ownerName = new Text(ownerInfo, SWT.SINGLE | SWT.BORDER);
 		      ownerName.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		      ownerName.setText("Enter Name of Owner to get Details!!");
 
 
 		     
@@ -331,13 +334,20 @@ public class DogShowController extends ViewPart implements IPerspectiveFactory{
 		         
 		         try {
 		         
-		        	 FileOutputStream fos = new FileOutputStream("Dog.txt");
+		        	 FileOutputStream fos = new FileOutputStream("D:\\Git\\Repo01\\DogShow\\src\\dogshow\\Dog.txt", true);
 		        	 
-		        	 ObjectOutputStream oos = new ObjectOutputStream(fos);
+		        	/* ObjectOutputStream oos = new ObjectOutputStream(fos);
 		        	 
-		        	 oos.writeObject(dse);
+		        	 oos.writeObject(dse);*/
+		        	 
+		        	 String dogCSV = dse.toCsv();
+		        	 byte[] dogCSVBytes = dogCSV.getBytes();
+		        	 fos.write(dogCSVBytes);
+		        	 fos.close();
 		        	 
 		        	 System.out.println("Dog Details added successfully to file");
+		        	 
+		        	 MessageDialog.openInformation(shell, "confirmation Dialogue", "Details added to text file successfully");
 		        	 
 
 		         } catch (FileNotFoundException e) {
@@ -365,37 +375,72 @@ public class DogShowController extends ViewPart implements IPerspectiveFactory{
 		    		   
 		    		   try {
 		    			   
-						FileInputStream fis = new FileInputStream("Dog.txt");
-						ObjectInputStream ois = new ObjectInputStream(fis);
+		    			   FileInputStream fis = new FileInputStream("D:\\Git\\Repo01\\DogShow\\src\\dogshow\\Dog.txt");
+		    			   /*ObjectInputStream ois = new ObjectInputStream(fis);
 						
-						Object obj = ois.readObject();
+							Object obj = ois.readObject();
 						
-						DogShowModel dog = (DogShowModel) obj;
+							DogShowModel dog = (DogShowModel) obj;
 						
-						dog.toString();
+							dog.toString();*/
 						
-						String owner = dog.getOwnerName();
+		    			   int fileSize = fis.available();
+		    			   byte[] arr = new byte[fileSize];
+		    			   fis.read(arr);
 						
-						String oName = ownerName.getText();
+		    			   String dogs = new String(arr);
+		    			   String[] dogsCSVArr = dogs.split("\n");
+		    			   ArrayList<DogShowModel> dogsArr = new ArrayList<DogShowModel>();
 						
-						if(owner.equalsIgnoreCase(oName)) {
+		    			   int flag =0;
+		    			   DogShowModel dsm = null;
+						
+		    			   for(String dog : dogsCSVArr ) {
 							
-							dogName.setText(dog.getDogName());
-		    	   			dogBreed.setText(dog.getDogBreed());
-		    	   			ownerName.setText(dog.getOwnerName());
-		    	   			ownerPhone.setText(dog.getPhno());
+		    				   dsm = DogShowModel.parse(dog);
+		    				   
+							
+		    				   String owner = dsm.getOwnerName(); 
+		    				   System.out.println("Owner"+owner);
+		    				   
+		    				   
+		    				   String oName = ownerName.getText();
+		    				   System.out.println("ONamer"+oName);
+							
+		    				   if(owner.equalsIgnoreCase(oName)) {
+		    					   
+		    					   flag = 1;
+		    					   System.out.println(flag);
+		    					   break;
+		    				   }
+							
+		    			   }
+							
+						
+						if(flag == 1) {
+							
+							dogName.setText(dsm.getDogName());
+		    	   			dogBreed.setText(dsm.getDogBreed());
+		    	   			ownerName.setText(dsm.getOwnerName());
+		    	   			ownerPhone.setText(dsm.getPhno());
+		    	   			
+		    	   			
+		    	   			MessageDialog.openInformation(shell, "confirmation Dialogue", "Details are read from text file successfully");
 							
 						}else {
 							
 
 							dogName.setText("Data Not Found");
 		    	   			dogBreed.setText("Data Not Found");
-		    	   			// ownerName.setText("Data Not Found");
 		    	   			ownerPhone.setText("Data Not Found");
+		    	   			
+		    	   			MessageDialog.openInformation(shell, "confirmation Dialogue", "Details are not found!!");
 							
 						}
 						
-						ois.close();
+						//ois.close();
+						
+						
 						
 						
 						
@@ -405,33 +450,11 @@ public class DogShowController extends ViewPart implements IPerspectiveFactory{
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					} catch (ClassNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}   
 		    		   
 		    	 }
 			});
 		       
-		    
-		       
-		    /*Dialog Button creation
-		       
-		       Button dialog = new Button(child, SWT.PUSH);
-		       
-		       dialog.setText("getDialog");
-		       
-		       dialog.addSelectionListener(new SelectionAdapter() {
-		    	   
-		    	   public void widgetSelected(SelectionEvent event) {
-		    		   
-		    		CustomDialog dialog = new CustomDialog(shell);
-		    		
-		    		dialog.open();
-		    		dialog.configureShell(shell);
-		    		dialog.createDialogArea(parent);
-		    	 }
-			});*/
 
 		       
 
